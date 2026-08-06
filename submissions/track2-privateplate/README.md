@@ -16,7 +16,6 @@ Chinese long-form documentation for development context: [`docs/README.zh.md`](d
 | --- | --- |
 | Project Specification | [`docs/submission/PROJECT_SPECIFICATION.md`](docs/submission/PROJECT_SPECIFICATION.md) |
 | AMD Radeon adaptation and optimization | [`docs/submission/AMD_RADEON_ROCM_ADAPTATION_AND_OPTIMIZATION.md`](docs/submission/AMD_RADEON_ROCM_ADAPTATION_AND_OPTIMIZATION.md) |
-| Claim-to-code and evidence matrix | [`docs/submission/CLAIM_EVIDENCE_MATRIX.md`](docs/submission/CLAIM_EVIDENCE_MATRIX.md) |
 | Supplementary PPT | [`docs/submission/PrivatePlate_Track2_Submission.pptx`](docs/submission/PrivatePlate_Track2_Submission.pptx) |
 | Demo video | [YouTube, unlisted](https://youtu.be/2XIZmQV2vQk) |
 | Submission materials guide | [`docs/submission/README.md`](docs/submission/README.md) |
@@ -172,7 +171,7 @@ Sealed 21-case run `sealed-suite-diag-16k-20260804T161006Z-brfix`:
 | Safety | **21/21** |
 | Real tool calls | **83/83** |
 
-The diagnostic run passed all model and safety cases. Four domain-level product cases remained below the project's deliberately strict internal 95% Product target, which is **not** an official Track 2 scoring threshold. This run is a diagnostic re-run (`notABlindClaim`), not a blind formal score. Evidence: `benchmarks/c0/stage-b/sealed-suite-diag-16k-20260804T161006Z-brfix/`. Detailed suite status, including the project-owned internal `finalConclusion`, is recorded in that evidence directory and in [`docs/submission/CLAIM_EVIDENCE_MATRIX.md`](docs/submission/CLAIM_EVIDENCE_MATRIX.md).
+The diagnostic run passed all model and safety cases. Four domain-level product cases remained below the project's deliberately strict internal 95% Product target, which is **not** an official Track 2 scoring threshold. This run is a diagnostic re-run (`notABlindClaim`), not a blind formal score. Evidence: `benchmarks/c0/stage-b/sealed-suite-diag-16k-20260804T161006Z-brfix/` (`summary.json`, per-case results, and transcript). Detailed suite status, including the project-owned internal `finalConclusion`, is recorded in that evidence directory.
 
 Two controlled Radeon A/B summaries report:
 

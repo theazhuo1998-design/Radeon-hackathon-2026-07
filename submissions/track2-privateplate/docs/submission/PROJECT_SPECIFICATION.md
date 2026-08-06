@@ -210,7 +210,7 @@ Sealed 21-case diagnostic re-run `sealed-suite-diag-16k-20260804T161006Z-brfix`:
 
 The runner stamps `notABlindClaim: true`. The suite's overall `finalConclusion` is `FAIL` because Product 17/21 is below the **project-owned** 95% threshold. That threshold is not an official Track 2 judging rule. Real tool calls: 83/83. Remaining Product failures: domain / evaluation-integration (4), model (0).
 
-Evidence: [`benchmarks/c0/stage-b/sealed-suite-diag-16k-20260804T161006Z-brfix/`](../../benchmarks/c0/stage-b/sealed-suite-diag-16k-20260804T161006Z-brfix/). Detailed failure notes remain in [`docs/evidence/MODEL_AND_RADEON_STATUS.md`](../evidence/MODEL_AND_RADEON_STATUS.md) and the adaptation document.
+Evidence: [`benchmarks/c0/stage-b/sealed-suite-diag-16k-20260804T161006Z-brfix/`](../../benchmarks/c0/stage-b/sealed-suite-diag-16k-20260804T161006Z-brfix/) (`summary.json`, per-case `result.json`, `case-results.jsonl`, `transcript.jsonl`). Additional methodology and optimization context are in the adaptation document.
 
 ## 7. Product boundaries
 

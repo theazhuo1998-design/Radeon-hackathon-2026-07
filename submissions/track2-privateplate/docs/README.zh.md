@@ -106,9 +106,9 @@ npm run dev:server
 | v2 dev seed 与生命周期合同 | 8 条 dev seed、6 条 lifecycle spec；6 条由真实 Agent/Domain/checkpoint runner 执行，Scripted 结果只标 `structure_only` |
 | 三栏 v2 scorer | 分开输出 `Model Native`、`Product Resilient`、`Safety`，主 oracle 是状态不变量 |
 | Radeon 真实模型（诊断复跑） | `sealed-suite-diag-16k-20260804T161006Z-brfix`：Model 21/21 · Product 17/21 · Safety 21/21；见 [AMD 适配说明](submission/AMD_RADEON_ROCM_ADAPTATION_AND_OPTIMIZATION.md)。诊断复跑，**不是**盲测正式成绩 |
-| 历史 Radeon / v1 product5 | 见 `docs/evidence/` 与 `benchmarks/`；**不能**当作 v2 已过真实模型门 |
+| 历史 Radeon / v1 product5 | 见仓库历史与现有 `benchmarks/` 正式证据；**不能**当作 v2 已过真实模型门 |
 
-本地结构通过 ≠ 盲测正式通过。真实模型证据必须绑定干净 commit，或完整 tree/patch SHA-256；完整边界见 [模型与 Radeon 证据](evidence/MODEL_AND_RADEON_STATUS.md)。
+本地结构通过 ≠ 盲测正式通过。真实模型证据必须绑定干净 commit，或完整 tree/patch SHA-256；当前正式诊断证据见 `benchmarks/c0/stage-b/sealed-suite-diag-16k-20260804T161006Z-brfix/`。
 
 ## 环境与依赖
 
@@ -319,7 +319,7 @@ docs/
 - [当前 Build Spec](../PRIVATEPLATE_CODEX_BUILD_SPEC_V1.md)
 - [闭环重建计划](PRIVATEPLATE_FULL_LOOP_AGENT_REBUILD_PLAN_FOR_GROK.md)
 - [AMD Radeon / ROCm 适配与优化说明](submission/AMD_RADEON_ROCM_ADAPTATION_AND_OPTIMIZATION.md)
-- [模型与 Radeon 证据](evidence/MODEL_AND_RADEON_STATUS.md)
+- 正式诊断证据：`benchmarks/c0/stage-b/sealed-suite-diag-16k-20260804T161006Z-brfix/`
 - [历史归档](archive/)：只用于追溯
 
 ## 提交材料状态
@@ -332,7 +332,6 @@ docs/
 | --- | --- | --- |
 | 项目说明（英，赛道二五项） | [`submission/PROJECT_SPECIFICATION.md`](submission/PROJECT_SPECIFICATION.md) | 已提交 |
 | AMD 适配与优化说明（英） | [`submission/AMD_RADEON_ROCM_ADAPTATION_AND_OPTIMIZATION.md`](submission/AMD_RADEON_ROCM_ADAPTATION_AND_OPTIMIZATION.md) | 已提交 |
-| 证据矩阵（英） | [`submission/CLAIM_EVIDENCE_MATRIX.md`](submission/CLAIM_EVIDENCE_MATRIX.md) | 已提交 |
 | 演示视频 | [YouTube (unlisted)](https://youtu.be/2XIZmQV2vQk) | 已链接 |
 | 补充 PPT | [`submission/PrivatePlate_Track2_Submission.pptx`](submission/PrivatePlate_Track2_Submission.pptx) | 已提交 |
 | 提交材料导读（英） | [`submission/README.md`](submission/README.md) | 已提交 |

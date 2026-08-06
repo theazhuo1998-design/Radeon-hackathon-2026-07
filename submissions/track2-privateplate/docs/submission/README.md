@@ -9,7 +9,6 @@ Judge-facing materials for **PrivatePlate** (AMD AI DevMaster 2026 · Track 2).
 | Project root README (environment, architecture, startup) | [`../../README.md`](../../README.md) |
 | Project Specification | [`PROJECT_SPECIFICATION.md`](./PROJECT_SPECIFICATION.md) |
 | AMD Radeon / ROCm adaptation and optimization | [`AMD_RADEON_ROCM_ADAPTATION_AND_OPTIMIZATION.md`](./AMD_RADEON_ROCM_ADAPTATION_AND_OPTIMIZATION.md) |
-| Claim-to-code and evidence matrix | [`CLAIM_EVIDENCE_MATRIX.md`](./CLAIM_EVIDENCE_MATRIX.md) |
 | Supplementary PPT | [`PrivatePlate_Track2_Submission.pptx`](./PrivatePlate_Track2_Submission.pptx) |
 | Demo video | [YouTube, unlisted](https://youtu.be/2XIZmQV2vQk) (also linked from the project root README) |
 

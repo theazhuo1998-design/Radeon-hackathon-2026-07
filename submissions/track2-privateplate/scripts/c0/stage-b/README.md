@@ -94,8 +94,8 @@ npm run test:c0-integrity
 
 ## 实例
 
-当前真实结果与声明边界见 `docs/evidence/MODEL_AND_RADEON_STATUS.md`；下一次复跑前提见
-`docs/evidence/RADEON_RUNBOOK.md`。
+当前正式诊断证据见 `benchmarks/c0/stage-b/sealed-suite-diag-16k-20260804T161006Z-brfix/`；
+Radeon 部署与优化说明见 `docs/submission/AMD_RADEON_ROCM_ADAPTATION_AND_OPTIMIZATION.md`。
 
 本文不构成开实例授权。每次正式运行都需要项目所有者当次明确确认。当前代码晚于最近一次
 Radeon 证据，尚未重新验证；已审阅的 hidden-v10 不得作为新的盲测复用。

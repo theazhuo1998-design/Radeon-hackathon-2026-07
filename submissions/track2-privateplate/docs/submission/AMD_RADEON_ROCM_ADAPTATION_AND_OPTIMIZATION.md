@@ -252,4 +252,3 @@ Offline tests and hash retrieval do not replace this Radeon reproduction path.
 | Media | Image code exists; audio optional and unavailable in recorded runtime; neither belongs to the performance claim |
 | Evidence scope | Diagnostic and A/B summaries committed under `benchmarks/`; per-case SQLite omitted |
 
-The claim-to-code and claim-to-evidence mapping is maintained in [`CLAIM_EVIDENCE_MATRIX.md`](./CLAIM_EVIDENCE_MATRIX.md).
