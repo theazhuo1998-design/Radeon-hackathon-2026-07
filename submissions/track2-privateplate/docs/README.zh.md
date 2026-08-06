@@ -191,7 +191,10 @@ RAG 与 chat 分离时的端口约定见上文「本地 RAG」小节。
 
 ## 安装
 
+从比赛总仓库克隆后，先进入项目目录：
+
 ```bash
+cd submissions/track2-privateplate
 npm install
 ```
 
@@ -228,7 +231,7 @@ npm run dev:web
 - Dashboard 默认 DB：`./data/privateplate-demo.sqlite`（跨重启保留家庭记忆）  
 - 测试使用 `:memory:`  
 - 「新对话」只清会话，不删 SQLite 家庭数据  
-- 分镜与口播：`submission/演示视频分镜脚本.md`；PPT 文案：`submission/PPT内容稿.md`
+- 提交材料导读：[`submission/README.md`](submission/README.md)
 
 ### 多模态输入（真实模型路径）
 
@@ -327,12 +330,12 @@ docs/
 
 | 材料 | 位置 | 状态 |
 | --- | --- | --- |
-| 项目说明（英，赛道二五项） | [`submission/PROJECT_SPECIFICATION.md`](submission/PROJECT_SPECIFICATION.md) | 可交；需时可导出 PDF |
-| AMD 适配与优化说明（英） | [`submission/AMD_RADEON_ROCM_ADAPTATION_AND_OPTIMIZATION.md`](submission/AMD_RADEON_ROCM_ADAPTATION_AND_OPTIMIZATION.md) | 就绪 |
-| AMD 适配中文导读 | [`submission/AMD适配与优化说明-中文导读.md`](submission/AMD适配与优化说明-中文导读.md) | 就绪 |
-| 官方 PR 正文草稿（英） | [`submission/PR_BODY.md`](submission/PR_BODY.md) | 视频链接已填；开 PR 时粘贴 |
-| 演示视频 | [YouTube (unlisted)](https://youtu.be/2XIZmQV2vQk) · [`演示视频分镜脚本.md`](submission/演示视频分镜脚本.md) | 成片已上传 |
-| 补充 PPT | [`submission/PrivatePlate_Track2_Submission.pptx`](submission/PrivatePlate_Track2_Submission.pptx) | 就绪 |
+| 项目说明（英，赛道二五项） | [`submission/PROJECT_SPECIFICATION.md`](submission/PROJECT_SPECIFICATION.md) | 已提交 |
+| AMD 适配与优化说明（英） | [`submission/AMD_RADEON_ROCM_ADAPTATION_AND_OPTIMIZATION.md`](submission/AMD_RADEON_ROCM_ADAPTATION_AND_OPTIMIZATION.md) | 已提交 |
+| 证据矩阵（英） | [`submission/CLAIM_EVIDENCE_MATRIX.md`](submission/CLAIM_EVIDENCE_MATRIX.md) | 已提交 |
+| 演示视频 | [YouTube (unlisted)](https://youtu.be/2XIZmQV2vQk) | 已链接 |
+| 补充 PPT | [`submission/PrivatePlate_Track2_Submission.pptx`](submission/PrivatePlate_Track2_Submission.pptx) | 已提交 |
+| 提交材料导读（英） | [`submission/README.md`](submission/README.md) | 已提交 |
 
 官方提交流程：fork [`AMD-DEV-CONTEST/Radeon-hackathon-2026-07`](https://github.com/AMD-DEV-CONTEST/Radeon-hackathon-2026-07) → 开 PR，标题形如 `Track 2, <姓名或队名>, PrivatePlate`（评委材料建议英文）。
 

@@ -2,7 +2,7 @@
   "name": "privateplate-amd-hackathon",
   "private": true,
   "version": "0.1.0",
-  "description": "PrivatePlate — private household meal orchestration agent for AMD Radeon hackathon",
+  "description": "PrivatePlate \u2014 private household meal orchestration agent for AMD Radeon hackathon",
   "type": "module",
   "workspaces": [
     "packages/*",
@@ -36,7 +36,7 @@
     "start": "npm run build && npm run start -w @privateplate/server",
     "fixtures:checksum": "node scripts/c1/compute-fixture-checksums.mjs",
     "rag:check": "node scripts/rag/check-embeddings.mjs",
-    "typecheck": "npm run typecheck -w @privateplate/contracts && npm run typecheck -w @privateplate/domain && npm run typecheck -w @privateplate/agent-runtime && npm run typecheck -w @privateplate/server && npm run typecheck -w @privateplate/web && npm run typecheck -w @privateplate/evals",
+    "typecheck": "find packages apps -name 'tsconfig.tsbuildinfo' -delete; npm run build -w @privateplate/contracts && npm run build -w @privateplate/domain && npm run build -w @privateplate/agent-runtime && npm run build -w @privateplate/server && npm run build -w @privateplate/evals && npm run typecheck -w @privateplate/contracts && npm run typecheck -w @privateplate/domain && npm run typecheck -w @privateplate/agent-runtime && npm run typecheck -w @privateplate/server && npm run typecheck -w @privateplate/web && npm run typecheck -w @privateplate/evals",
     "check": "npm run test:eval-v2 && npm run typecheck && npm run test:historical-v1-routing-smoke && npm run test:c0-integrity-current && git diff --check"
   },
   "engines": {

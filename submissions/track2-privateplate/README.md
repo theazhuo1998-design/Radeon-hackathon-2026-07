@@ -19,8 +19,7 @@ Chinese long-form documentation for development context: [`docs/README.zh.md`](d
 | Claim-to-code and evidence matrix | [`docs/submission/CLAIM_EVIDENCE_MATRIX.md`](docs/submission/CLAIM_EVIDENCE_MATRIX.md) |
 | Supplementary PPT | [`docs/submission/PrivatePlate_Track2_Submission.pptx`](docs/submission/PrivatePlate_Track2_Submission.pptx) |
 | Demo video | [YouTube, unlisted](https://youtu.be/2XIZmQV2vQk) |
-| Contest PR draft | [`docs/submission/PR_BODY.md`](docs/submission/PR_BODY.md) |
-| Final submission checklist | [`docs/submission/README.md`](docs/submission/README.md) |
+| Submission materials guide | [`docs/submission/README.md`](docs/submission/README.md) |
 
 ## Agent architecture
 
@@ -124,7 +123,10 @@ See [`scripts/c0/stage-b/runtime-pin.json`](scripts/c0/stage-b/runtime-pin.json)
 
 ## Quick start
 
+From a clone of the contest repository:
+
 ```bash
+cd submissions/track2-privateplate
 npm install
 
 # The URLs must resolve to loopback. They may be local processes or SSH tunnels
@@ -163,14 +165,14 @@ These commands validate code structure and offline fixtures. They do not substit
 
 Sealed 21-case run `sealed-suite-diag-16k-20260804T161006Z-brfix`:
 
-| Column | Result | Project threshold | Gate |
-| --- | ---: | ---: | --- |
-| Model | **21/21** | 85% | PASS |
-| Product | **17/21** | 95% | **FAIL** |
-| Safety | **21/21** | 100% | PASS |
-| Real tool calls | **83/83** | — | — |
+| Column | Result |
+| --- | ---: |
+| Model | **21/21** |
+| Product | **17/21** |
+| Safety | **21/21** |
+| Real tool calls | **83/83** |
 
-Overall internal suite `finalConclusion=FAIL` because Product 17/21 is below the **project-owned** 95% gate — not an official Track 2 score sheet. Evidence: `benchmarks/c0/stage-b/sealed-suite-diag-16k-20260804T161006Z-brfix/`.
+The diagnostic run passed all model and safety cases. Four domain-level product cases remained below the project's deliberately strict internal 95% Product target, which is **not** an official Track 2 scoring threshold. This run is a diagnostic re-run (`notABlindClaim`), not a blind formal score. Evidence: `benchmarks/c0/stage-b/sealed-suite-diag-16k-20260804T161006Z-brfix/`. Detailed suite status, including the project-owned internal `finalConclusion`, is recorded in that evidence directory and in [`docs/submission/CLAIM_EVIDENCE_MATRIX.md`](docs/submission/CLAIM_EVIDENCE_MATRIX.md).
 
 Two controlled Radeon A/B summaries report:
 

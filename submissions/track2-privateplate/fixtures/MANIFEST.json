@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAtUtc": "2026-08-04T04:09:57.807Z",
-  "claimBoundary": "Checksums for offline fixture integrity. Synthetic demo data only; not clinical datasets.",
+  "generatedAtUtc": "2026-08-06T07:53:25.400Z",
+  "claimBoundary": "Checksums for offline fixture integrity. Synthetic demo data only; not clinical datasets. Sealed fixtures/c0/hidden/**/scenarios.full.json remain gitignored and are intentionally omitted from this manifest.",
   "licenses": [
     {
       "id": "lic-privateplate-synthetic-1",
@@ -42,11 +42,6 @@
       "bytes": 5222
     },
     {
-      "path": "fixtures/c0/hidden/v1/scenarios.full.json",
-      "sha256": "967d3f938dbf285943177fed249954eeccccb0d8cfffe67537a8e40f2b1aa8b1",
-      "bytes": 4698
-    },
-    {
       "path": "fixtures/c0/hidden/v10/README.md",
       "sha256": "e98777ee36a1c67754cea0f6ff2697d34af9b267cc57c77ef220e78ff35bf115",
       "bytes": 872
@@ -55,11 +50,6 @@
       "path": "fixtures/c0/hidden/v10/manifest.json",
       "sha256": "f7a77a196a08a317630b79b7027d5a34153078969155e0553c59e3279feefb7c",
       "bytes": 7814
-    },
-    {
-      "path": "fixtures/c0/hidden/v10/scenarios.full.json",
-      "sha256": "e6e8357eba5c718f85af0a58f1b7f10235e7e1905e27617f1547e72c0ec1f494",
-      "bytes": 8153
     },
     {
       "path": "fixtures/c0/hidden/v2/README.md",
@@ -72,11 +62,6 @@
       "bytes": 7879
     },
     {
-      "path": "fixtures/c0/hidden/v2/scenarios.full.json",
-      "sha256": "08a404a4390aeef1871d12c25db201a95a3143360a4fdc5e19235566e6fabd2b",
-      "bytes": 6860
-    },
-    {
       "path": "fixtures/c0/hidden/v3/README.md",
       "sha256": "817c363eed94590b6585d13f9f2cd33c1f6c1ef166465aeb41956aa5d8b7cff4",
       "bytes": 703
@@ -85,11 +70,6 @@
       "path": "fixtures/c0/hidden/v3/manifest.json",
       "sha256": "a9f2d0f6c7d1e2ec79d6b5fc7dcaf0e6628a9cbad03aef58059bc6233b8c3b71",
       "bytes": 7797
-    },
-    {
-      "path": "fixtures/c0/hidden/v3/scenarios.full.json",
-      "sha256": "cd56731b31c010a379b7e35b4e55050ae0da99945bc3b8a822b6f955c2e58d17",
-      "bytes": 6570
     },
     {
       "path": "fixtures/c0/hidden/v4/README.md",
@@ -102,11 +82,6 @@
       "bytes": 7775
     },
     {
-      "path": "fixtures/c0/hidden/v4/scenarios.full.json",
-      "sha256": "d18edc27177abbad488f2c02b555cb75f627116a6a439e61e9837db99de91a0b",
-      "bytes": 6432
-    },
-    {
       "path": "fixtures/c0/hidden/v5/README.md",
       "sha256": "a51011f18af986245a5a6b3dd12817a5abd96c5312d9459ca2057442755cf584",
       "bytes": 641
@@ -115,11 +90,6 @@
       "path": "fixtures/c0/hidden/v5/manifest.json",
       "sha256": "4679bf0f7265a1fa6f6946d1b88a0800943c43a03d6e5652f56f358b0d8b1846",
       "bytes": 8066
-    },
-    {
-      "path": "fixtures/c0/hidden/v5/scenarios.full.json",
-      "sha256": "1cde0ab4bb73ece89d1d39efadb6dfdc09bd3f40a34e64a5ae8a7585fb5e15e8",
-      "bytes": 7222
     },
     {
       "path": "fixtures/c0/hidden/v6/README.md",
@@ -132,11 +102,6 @@
       "bytes": 8133
     },
     {
-      "path": "fixtures/c0/hidden/v6/scenarios.full.json",
-      "sha256": "88dd758726f3d481d377986da8529c30277d892f17236ec91806363fb410d56f",
-      "bytes": 7290
-    },
-    {
       "path": "fixtures/c0/hidden/v7/README.md",
       "sha256": "2bbacaa787f5a7af10df2dc8b0b79d95d5f3d1a43fb2aaf1852e8afcc5ff6ea8",
       "bytes": 641
@@ -145,11 +110,6 @@
       "path": "fixtures/c0/hidden/v7/manifest.json",
       "sha256": "ab605def4cfc51026010d429f38c6ac538f9dfb18007c0f958b1e7c7ac0387a7",
       "bytes": 8113
-    },
-    {
-      "path": "fixtures/c0/hidden/v7/scenarios.full.json",
-      "sha256": "37195853cd828d8f4143fefaaf75616b0fa546d9c1d7aa33f61039bdf4cc11b6",
-      "bytes": 7687
     },
     {
       "path": "fixtures/c0/hidden/v8/README.md",
@@ -162,11 +122,6 @@
       "bytes": 8171
     },
     {
-      "path": "fixtures/c0/hidden/v8/scenarios.full.json",
-      "sha256": "3285a364d80d0b9958d76c4dd0f32c485f13d87eeb4cd7905713b2214afb71a8",
-      "bytes": 8234
-    },
-    {
       "path": "fixtures/c0/hidden/v9/README.md",
       "sha256": "f29c636c54d997bdd91141fe31cf220c081ce64561763b096276d6fae05bc58f",
       "bytes": 752
@@ -175,11 +130,6 @@
       "path": "fixtures/c0/hidden/v9/manifest.json",
       "sha256": "bbcaa666d18fe147088709bcd8acb62a31e767434ce2d888b7c5bc7c1663598b",
       "bytes": 8376
-    },
-    {
-      "path": "fixtures/c0/hidden/v9/scenarios.full.json",
-      "sha256": "0acd3ba8784d3d8771351b8f7e81d85ffb4d459b9190ee787b729dc3846c9545",
-      "bytes": 7941
     },
     {
       "path": "fixtures/c0/tool-calling-holdout-v1.json",
