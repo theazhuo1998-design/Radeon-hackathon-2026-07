@@ -1,0 +1,24 @@
+.DS_Store
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+packages/*/dist/
+
+.env
+.env.*
+!.env.example
+
+*.sqlite
+*.sqlite-*
+runtime-data/
+logs/
+
+benchmarks/c0/stage-b/raw/
+# Keep C5 summaries when generated; ignore local-only noise if added later
+*.log
+
+# Hidden blind suite full text (digests only are committed under fixtures/c0/hidden/v1/manifest.json)
+fixtures/c0/hidden/**/scenarios.full.json
+fixtures/c0/hidden/**/*.unlocked.json
+fixtures/c0/hidden/v2/scenarios.full.json

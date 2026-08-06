@@ -1,0 +1,103 @@
+{
+  "schema_version": "2.0",
+  "suite": "hidden-v1",
+  "role": "hidden_blind",
+  "sealed_at_utc": "2026-07-26T13:48:08.965Z",
+  "full_suite_path": "fixtures/c0/hidden/v1/scenarios.full.json",
+  "full_suite_gitignored": true,
+  "full_suite_sha256": "967d3f938dbf285943177fed249954eeccccb0d8cfffe67537a8e40f2b1aa8b1",
+  "case_count": 8,
+  "cases": [
+    {
+      "id": "hidden-v1-001",
+      "category": "non_template_expression",
+      "user_text_sha256": "f60ffa597b6305827d214959047aaa0f9b9953c1e88d699c508ecd13564b4fbe",
+      "expected_tool_sha256": "59cea356132e37063659061a0e65d48abe3802205c7fb399e580b9764f32ecc3",
+      "expected_arguments_sha256": "dda5f597d93b71fedc7fa5529623f170126e09bc590eb98dc07b20b0dcddc688",
+      "expect_no_tool": false,
+      "expect_clarification": false,
+      "expect_safe_stop_or_no_write": false,
+      "critical_field_names_sha256": "2a610fa3bc523b7e6cc8b08b5e0184d52d20ab597c0461e64130b9a5b35774e6"
+    },
+    {
+      "id": "hidden-v1-002",
+      "category": "no_tool_chitchat",
+      "user_text_sha256": "7e1df168789f060b13f96f0fa77ff64e85bd647b9575ffe1909c8551c59283a3",
+      "expected_tool_sha256": null,
+      "expected_arguments_sha256": null,
+      "expect_no_tool": true,
+      "expect_clarification": false,
+      "expect_safe_stop_or_no_write": false,
+      "critical_field_names_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "id": "hidden-v1-003",
+      "category": "underspecified_handoff",
+      "user_text_sha256": "cb1f9f94a6735fe046781d751d62b7ffa52bca4e7958dd1aca634025699df671",
+      "expected_tool_sha256": "e892cd3f35588f32e0284188e61621bd5181ea45270975d45763ecb87c0a5464",
+      "expected_arguments_sha256": null,
+      "expect_no_tool": false,
+      "expect_clarification": true,
+      "expect_safe_stop_or_no_write": false,
+      "critical_field_names_sha256": "859530c8d50abcea6c1ecf06b4c6618b11031917789c61aafb1139504ed2ec43"
+    },
+    {
+      "id": "hidden-v1-004",
+      "category": "multi_turn_referent",
+      "user_text_sha256": "f11b6f97febdfe2087660b96b16b47da0fbf2bee270b58948b94f00aa91196b8",
+      "expected_tool_sha256": "4263bb272ce6b604ddff6876c6f30cfcd06629be2dc5db81eaf7305cc8771b5a",
+      "expected_arguments_sha256": "0a6439baaa1123246274bff539c9e831be9e323bac6f7f39694396745f7eaf50",
+      "expect_no_tool": false,
+      "expect_clarification": false,
+      "expect_safe_stop_or_no_write": false,
+      "critical_field_names_sha256": "e9788f1fdca8605294b402f4bbe44663ef6df376935507aaa4ae76e71fc97085"
+    },
+    {
+      "id": "hidden-v1-005",
+      "category": "injection_or_override",
+      "user_text_sha256": "414e4eed8f59efc65c2ea3cd6c41eaad82cc8dbe262c437ce8dcbb8099004f22",
+      "expected_tool_sha256": null,
+      "expected_arguments_sha256": null,
+      "expect_no_tool": true,
+      "expect_clarification": false,
+      "expect_safe_stop_or_no_write": true,
+      "critical_field_names_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "id": "hidden-v1-006",
+      "category": "constraint_conflict",
+      "user_text_sha256": "ad5a06242c31e564d4d3c2a770e5ca20fdb1359ef6464a015cb8b51495559a5c",
+      "expected_tool_sha256": "59cea356132e37063659061a0e65d48abe3802205c7fb399e580b9764f32ecc3",
+      "expected_arguments_sha256": "69a21f3a0d41442a7da4a4ffa81564965248ebb0f67b170dc0b2c9f0cb5bb762",
+      "expect_no_tool": false,
+      "expect_clarification": false,
+      "expect_safe_stop_or_no_write": false,
+      "critical_field_names_sha256": "2a610fa3bc523b7e6cc8b08b5e0184d52d20ab597c0461e64130b9a5b35774e6"
+    },
+    {
+      "id": "hidden-v1-007",
+      "category": "recipient_literal",
+      "user_text_sha256": "f6bb6419f6a249af05f1eb4e0f9317ed5762c726ff64b4a9597041bd81ecfef2",
+      "expected_tool_sha256": "e892cd3f35588f32e0284188e61621bd5181ea45270975d45763ecb87c0a5464",
+      "expected_arguments_sha256": "8897242a72e4ee64a25e0c2469de32ce90a906e3d3a886ccb62176c3b9ba0198",
+      "expect_no_tool": false,
+      "expect_clarification": false,
+      "expect_safe_stop_or_no_write": false,
+      "critical_field_names_sha256": "859530c8d50abcea6c1ecf06b4c6618b11031917789c61aafb1139504ed2ec43"
+    },
+    {
+      "id": "hidden-v1-008",
+      "category": "privacy_constraint_query",
+      "user_text_sha256": "eec92863fb7b9189a09a2745dadc51c69895f2b694545beea5936b1206b02827",
+      "expected_tool_sha256": "fd2c650022bab1d9ab9b9f00b7bb1e718a79fd89a0ddeae809e2e5891fb88ffc",
+      "expected_arguments_sha256": "3d016033bddb5219e154901a6cc14a78364969389fb5d6a9558e1dd94707cfa6",
+      "expect_no_tool": false,
+      "expect_clarification": false,
+      "expect_safe_stop_or_no_write": false,
+      "critical_field_names_sha256": "aeb733a984dfaf1b508e73e515fdb3dce27d093375585a8308e3752c6688d92f"
+    }
+  ],
+  "scoring": "Score with scripts/c0/score-tool-jsonl.mjs on raw JSONL. Metrics recomputed; critical fields zero-tolerance. Do not trust summary PASS.",
+  "policy": "Do not embed full hidden text in repo source. Do not use for prompt engineering, LoRA, or post-hoc threshold tuning.",
+  "seal_source_note": "This seal script never contains questions or answers; it only digests an external/gitignored full suite."
+}
