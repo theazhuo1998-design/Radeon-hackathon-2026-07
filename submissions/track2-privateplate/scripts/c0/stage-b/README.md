@@ -34,7 +34,7 @@
 | `00-install-node22.sh` | Node ≥22.13 |
 | `00-verify-runtime.mjs` | 模型下载前核对 pin；不符即停 |
 | `00-stop-vllm.sh` | 成功/失败/中断都停止模型服务 |
-| `02c-run-public-golden.mjs` | 用真实 `OpenAiCompatibleToolProvider` 驱动 36 题 Public Golden，并写事实 JSONL 与独立评分摘要 |
+| `layered-product-diag.mjs` | 当前九工具产品路径诊断采集 |
 | `write-failure-summary.mjs` | 统一失败/完成摘要 |
 | `write-evidence-inventory.mjs` | 整轮文件清单 + SHA-256 |
 | `verify-install-plan.mjs` | **本地离线**静态检查（不连 Radeon） |
@@ -48,40 +48,14 @@ bash scripts/c0/stage-b/00-install-runtime.sh --dry-run
 node scripts/c0/stage-b/verify-install-plan.mjs
 ```
 
-## 门禁（任一失败整体 FAIL）
+## 当前提交口径
 
-1. **v2 公开回归 14 题**：schema/tool ≥0.9，标准化参数 ≥0.8；原始参数完整度只作诊断
-2. **v2 公开验证 7 题**（非隐藏盲测）同上
-3. **hidden-v10 盲测 10 题**是下一次正式运行的唯一隐藏套件，并绑定冻结产品基线 `c9f22e79c5b67553e42999b758c102b2eaf1a934`；hidden-v2 至 v9 仅保留为评审历史
-4. **privacy** 零违规
-5. **effective 安全参数** 100% 通过；漏传成员记能力失败，传入错误/额外成员才记安全范围扩大
-6. **critical 字段**零容忍（独立 scorer 可复算）
-7. **启动前** install + runtime pin：凭证/版本不符 → **下载模型前停止**
-8. **启动后模型校验**：全部声明权重大小 + SHA-256、真实进程参数、模型 revision、parser、官方模板和 `/v1/models`
-9. **性能证据**：固定 5 次 warm、固定 8 GiB KV cache；TTFT、tokens/s 或显存任一缺失都失败
-10. **收尾**：无论成败停止 vLLM；写完整的 `raw/run-all.log`、全部失败步骤摘要和最终 SHA-256 清单
-11. **免费实例口径**：记录实例编号与结束时间；credits 和 Destroy 凭证可选，不参与模型质量门禁
-12. **Public Golden**：36 题必须全部完成采集，并分别满足 Model ≥85%、Product ≥95%、Safety 100%
+历史五工具 regression / holdout / hidden suite / Public Golden 采集器已从本提交包退役。
+当前九工具产品证据以 `layered-product-diag.mjs` 与已封存的诊断树为准：
 
-`run-all.sh` 在五场景产品链路之后自动运行 Public Golden。原始事实写入
-`public-golden.jsonl`，评分写入 `public-golden-summary.json`。公开题已经被开发者看过，
-因此只能作为真实 Provider 回归证据，不能当作新的密封盲测成绩。
+`benchmarks/c0/stage-b/sealed-suite-diag-16k-20260804T161006Z-brfix/`
 
-只做 Agent 回归诊断时设置：
-
-```bash
-export PRIVATEPLATE_COLLECTION_MODE=agent_diagnostic
-bash scripts/c0/stage-b/run-all.sh
-```
-
-该模式运行基线、五场景产品链路和 36 题 Public Golden，跳过已审阅的工具路由/hidden
-套件，写出 `agent-diagnostic-summary.json`。默认模式仍是 `formal`。
-
-全部必需字段和门禁通过后直接得到 `EVIDENCE_COMPLETE`。是否保留或 Destroy 免费实例由所有者另行决定。
-
-模型侧的配餐拒绝项使用 `{ targetType, targetId }`，明确区分食材与整道菜；进入业务层后再转换成原有食材/菜品数组，旧题和历史 JSONL 不改写。若第一次参数格式错误，重试只保留原工具并附上准确字段清单。
-
-`run-all.sh` 已自动保存完整日志。复制证据目录时保持其内容不变；SSH、scp 等外层日志放在证据目录旁边，不要在最终清单生成后再塞进目录。
+`run-all.sh` 仍负责安装、runtime pin、基线、会话元数据、失败摘要与证据清单；不再调用已删除的五工具 / Public Golden 采集脚本。
 
 ## 本地预检
 
@@ -89,7 +63,8 @@ bash scripts/c0/stage-b/run-all.sh
 node scripts/c0/stage-b/validate-model-profile.mjs
 node scripts/c0/stage-b/verify-install-plan.mjs
 bash scripts/c0/stage-b/00-install-runtime.sh --dry-run
-npm run test:c0-integrity
+npm run test:c0-integrity-current
+npm run check
 ```
 
 ## 实例
@@ -97,5 +72,4 @@ npm run test:c0-integrity
 当前正式诊断证据见 `benchmarks/c0/stage-b/sealed-suite-diag-16k-20260804T161006Z-brfix/`；
 Radeon 部署与优化说明见 `docs/submission/AMD_RADEON_ROCM_ADAPTATION_AND_OPTIMIZATION.md`。
 
-本文不构成开实例授权。每次正式运行都需要项目所有者当次明确确认。当前代码晚于最近一次
-Radeon 证据，尚未重新验证；已审阅的 hidden-v10 不得作为新的盲测复用。
+本文不构成开实例授权。每次正式运行都需要项目所有者当次明确确认。

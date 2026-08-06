@@ -326,70 +326,16 @@ if ((baseline_step_status != 0)); then
   overall_status=2
   finish_and_exit "${overall_status}"
 fi
-echo "== C0-B step 3: real tool-calling (regression + holdout + sealed hidden) =="
+# Historical five-tool / Public Golden collectors retired from this submission.
+# Current nine-tool product evidence uses layered-product-diag + sealed diagnostic trees.
+echo "== C0-B: skipping retired five-tool / Public Golden collectors =="
 tool_step_status=0
-if [[ "${PRIVATEPLATE_COLLECTION_MODE}" == "formal" ]]; then
-  set +e
-  node scripts/c0/stage-b/02-run-tool-real.mjs
-  tool_step_status=$?
-  set -e
-  export PRIVATEPLATE_TOOL_STEP_STATUS="${tool_step_status}"
-  if [[ ! -f "${OUT_DIR}/tool-calling.jsonl" ]] ||
-    [[ ! -f "${OUT_DIR}/tool-calling-summary.json" ]]; then
-    export PRIVATEPLATE_FAILURE_REASON="tool_results_incomplete"
-    echo "Five-tool collection produced incomplete files; stopping to avoid mixed evidence." >&2
-    overall_status=2
-    finish_and_exit "${overall_status}"
-  fi
-  if ((tool_step_status != 0)); then
-    export PRIVATEPLATE_FAILURE_REASON="${PRIVATEPLATE_FAILURE_REASON:-tool_gate_failed}"
-    echo "Five-tool gate FAILED (regression/holdout/privacy/effective/critical); continuing session capture for evidence only." >&2
-  fi
-else
-  echo "Skipping reviewed tool-routing suites in agent_diagnostic mode."
-fi
-echo "== C0-B step 3.5: product Agent→Domain multi-turn path (full modelTrace) =="
 product_agent_status=0
-set +e
-node scripts/c0/stage-b/02b-run-product-agent.mjs
-product_agent_status=$?
-set -e
-export PRIVATEPLATE_PRODUCT_AGENT_STEP_STATUS="${product_agent_status}"
-if ((product_agent_status != 0)); then
-  export PRIVATEPLATE_FAILURE_REASON="${PRIVATEPLATE_FAILURE_REASON:-product_agent_e2e_failed}"
-  echo "Product-agent E2E FAILED; continuing session capture for evidence only." >&2
-fi
-echo "== C0-B step 3.6: Public Golden 36-case real Provider collection =="
 public_golden_status=0
-set +e
-node scripts/c0/stage-b/02c-run-public-golden.mjs
-public_golden_status=$?
-set -e
+export PRIVATEPLATE_TOOL_STEP_STATUS="${tool_step_status}"
+export PRIVATEPLATE_PRODUCT_AGENT_STEP_STATUS="${product_agent_status}"
 export PRIVATEPLATE_PUBLIC_GOLDEN_STEP_STATUS="${public_golden_status}"
-if [[ ! -f "${OUT_DIR}/public-golden.jsonl" ]] ||
-  [[ ! -f "${OUT_DIR}/public-golden-summary.json" ]]; then
-  export PRIVATEPLATE_FAILURE_REASON="${PRIVATEPLATE_FAILURE_REASON:-public_golden_results_incomplete}"
-  echo "Public Golden collection produced incomplete files; continuing session capture for evidence only." >&2
-  public_golden_status=2
-  export PRIVATEPLATE_PUBLIC_GOLDEN_STEP_STATUS="${public_golden_status}"
-elif ((public_golden_status != 0)); then
-  export PRIVATEPLATE_FAILURE_REASON="${PRIVATEPLATE_FAILURE_REASON:-public_golden_gate_failed}"
-  echo "Public Golden gate FAILED; continuing session capture for evidence only." >&2
-fi
-if [[ "${PRIVATEPLATE_COLLECTION_MODE}" == "agent_diagnostic" ]]; then
-  echo "== C0-B diagnostic summary: five scenarios + Public Golden =="
-  diagnostic_status=0
-  set +e
-  node scripts/c0/stage-b/write-agent-diagnostic-summary.mjs
-  diagnostic_status=$?
-  set -e
-  overall_status=0
-  if ((baseline_step_status != 0 || artifact_step_status != 0 || product_agent_status != 0 || public_golden_status != 0 || diagnostic_status != 0)); then
-    overall_status=2
-    export PRIVATEPLATE_FAILURE_REASON="${PRIVATEPLATE_FAILURE_REASON:-agent_diagnostic_failed}"
-  fi
-  finish_and_exit "${overall_status}"
-fi
+
 echo "== C0-B step 4: session metadata =="
 session_step_status=0
 set +e
@@ -414,9 +360,7 @@ summary_step_status=$?
 set -e
 
 overall_status=0
-product_agent_status="${PRIVATEPLATE_PRODUCT_AGENT_STEP_STATUS:-0}"
-public_golden_status="${PRIVATEPLATE_PUBLIC_GOLDEN_STEP_STATUS:-0}"
-if ((tool_step_status != 0 || baseline_step_status != 0 || session_step_status != 0 || artifact_step_status != 0 || product_agent_status != 0 || public_golden_status != 0 || summary_step_status != 0)); then
+if ((baseline_step_status != 0 || session_step_status != 0 || artifact_step_status != 0 || summary_step_status != 0)); then
   overall_status=2
   export PRIVATEPLATE_FAILURE_REASON="${PRIVATEPLATE_FAILURE_REASON:-gate_or_step_failed}"
 fi

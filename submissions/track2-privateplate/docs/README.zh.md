@@ -264,7 +264,7 @@ npm run check
 `fixtures/evals/stateful-v2-lifecycle-specs.json` 是 6 条正式生命周期规格。
 生命周期规格证明 Product Resilient / Safety 结构层（`STRUCTURE_ONLY`），不提供模型能力分。
 Radeon 真实模型诊断复跑见上文「当前证据边界」与 `submission/`；**不是**盲测正式成绩。
-`npm run check` 含 `test:eval-v2`、typecheck、旧五工具 LocalMock routing smoke，以及不依赖旧 v1 工具合同的 `test:c0-integrity-current`。真正九工具产品路径以 `test:eval-v2` 为准。
+`npm run check` 含 `test:eval-v2`、typecheck、LocalMock routing smoke，以及 `test:c0-integrity-current`。真正九工具产品路径以 `test:eval-v2` 为准。
 
 ## 仓库结构
 
