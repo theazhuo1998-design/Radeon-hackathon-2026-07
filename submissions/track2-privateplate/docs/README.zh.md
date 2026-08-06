@@ -1,6 +1,6 @@
 # PrivatePlate — 中文详细说明
 
-> 根目录 [`README.md`](../README.md) 为评委可读的英文入口。本文保留原中文长文（产品能力、证据边界、历史路径说明等），供内部查阅；正式参赛 PR 以英文 README + `submission/` 为准。
+> 根目录 [`README.md`](../README.md) 为评委可读的英文入口。本文为内部中文补充（产品能力与证据边界）；正式参赛 PR 以英文 README + `submission/` 为准。
 
 PrivatePlate 是一个运行在本地环境中的家庭用餐协调 Agent，参赛方向为 **AMD AI DevMaster 2026 赛道二：私有 AI Agent 开发与本地部署**。
 
@@ -32,30 +32,19 @@ PrivatePlate 不是医疗助手。模型负责理解自然语言、多轮上下�
 
 ## 架构
 
-正式分层架构图见 [submission/PROJECT_SPECIFICATION.md](submission/PROJECT_SPECIFICATION.md) §2（与根目录英文 `README.md` 一致）。以下为历史保留的线性流向示意，**不再作为参赛架构图口径**：
+正式分层架构图见 [submission/PROJECT_SPECIFICATION.md](submission/PROJECT_SPECIFICATION.md) §2（与根目录英文 `README.md` 一致）。
 
-```mermaid
-flowchart LR
-    U["家庭用餐负责人"] --> W["React Web"]
-    W --> S["Express Server + SSE"]
-    S --> A["PrivatePlateAgent"]
-    A --> L["本机 vLLM local_vllm"]
-    A --> T["八工具网关 protocol v2"]
-    T --> D["Domain + SQLite 日账本"]
-    S --> C["用户确认 meal-complete"]
-    C --> D
-```
+模型可见产品工具（九个；无 `commit_*`）：
 
-模型可见产品工具（无 `commit_*`）：
-
-1. `get_day_context` — 日目标、已摄入、剩余额度、库存、家庭记忆  
-2. `find_dish_candidates` — 硬过滤候选菜（无排名）  
-3. `finalize_meal_plan` — Agent 提交完整选菜；Domain 校验、**营养换算**、采购缺口、落盘  
-4. `retrieve_local_knowledge` — **本地 RAG**（embedding + 余弦检索，带来源路径）  
-5. `preview_inventory_change` — 预览入库变更（确认前不写库）
-6. `preview_member_memory_change` — 预览家庭偏好/事实变更（确认前不写库）
-7. `preview_caregiver_task` — 预览任务卡与**采购清单**（不发送）
-8. `preview_meal_completion` — 预览「按计划吃完」的账本写入（不落库）
+1. `get_day_context` — 日目标、已摄入、剩余额度、库存、家庭记忆
+2. `get_inventory` — 只读库存查询
+3. `find_dish_candidates` — 硬过滤候选菜（无排名）
+4. `finalize_meal_plan` — Agent 提交完整选菜；Domain 校验、**营养换算**、采购缺口、落盘
+5. `retrieve_local_knowledge` — **本地 RAG**（embedding + 余弦检索，带来源路径）
+6. `preview_inventory_change` — 预览入库变更（确认前不写库）
+7. `preview_member_memory_change` — 预览家庭偏好/事实变更（确认前不写库）
+8. `preview_caregiver_task` — 预览任务卡与**采购清单**（不发送；caregiver 为本地模拟收件箱）
+9. `preview_meal_completion` — 预览「按计划吃完」的账本写入（不落库）
 
 ### 本地 RAG（bge-small + 独立端口）
 
@@ -84,19 +73,10 @@ npm run dev:server
 
 确认写入：
 
-- 任务卡：UI / `POST /api/pending-actions/:id/confirm`  
-- 本餐完成：`POST /api/households/:id/meal-complete`  
+- 任务卡：UI / `POST /api/pending-actions/:id/confirm`
+- 本餐完成：`POST /api/households/:id/meal-complete`
 
-**仍在 Domain（未删除）：** 营养计算、采购缺口、任务卡构建与确认发送。
-
-**已删除 / 不再作为产品路径：**
-
-- `DeterministicDemoAgent` / `deterministic_dev`  
-- 模型侧旧选菜工具：`get_meal_context`、`compose_family_meal`、`revise_family_meal`（代码选 winner）  
-- `retrieve_approved_guidance` 作为当前产品主工具（可后续再接）  
-- Domain 为 Agent 自动选 bundle winner 的产品链路  
-
-历史 v1 题集与 JSONL 仍保留在 `fixtures/` / `benchmarks/`，**不改写历史证据**；它们不是当前产品验收主线。
+**仍在 Domain：** 营养计算、采购缺口、任务卡构建与确认发送。Agent 选菜；Domain **不排名、不选 winner**。
 
 ## 当前证据边界
 
@@ -106,9 +86,8 @@ npm run dev:server
 | v2 dev seed 与生命周期合同 | 8 条 dev seed、6 条 lifecycle spec；6 条由真实 Agent/Domain/checkpoint runner 执行，Scripted 结果只标 `structure_only` |
 | 三栏 v2 scorer | 分开输出 `Model Native`、`Product Resilient`、`Safety`，主 oracle 是状态不变量 |
 | Radeon 真实模型（诊断复跑） | `sealed-suite-diag-16k-20260804T161006Z-brfix`：Model 21/21 · Product 17/21 · Safety 21/21；见 [AMD 适配说明](submission/AMD_RADEON_ROCM_ADAPTATION_AND_OPTIMIZATION.md)。诊断复跑，**不是**盲测正式成绩 |
-| 历史 Radeon / v1 product5 | 见仓库历史与现有 `benchmarks/` 正式证据；**不能**当作 v2 已过真实模型门 |
 
-本地结构通过 ≠ 盲测正式通过。真实模型证据必须绑定干净 commit，或完整 tree/patch SHA-256；当前正式诊断证据见 `benchmarks/c0/stage-b/sealed-suite-diag-16k-20260804T161006Z-brfix/`。
+本地结构通过 ≠ 盲测正式通过。当前正式诊断证据见 `benchmarks/c0/stage-b/sealed-suite-diag-16k-20260804T161006Z-brfix/`。
 
 ## 环境与依赖
 
@@ -228,9 +207,9 @@ npm run dev:web
 就绪自检：`curl -s http://127.0.0.1:8787/api/runtime/status` 应见 `"modelReady":true` 与 `"rag":{"mode":"vllm_embedding",...}`。
 重置演示数据：`curl -s -X POST http://127.0.0.1:8787/api/demo/reset`。
 
-- Dashboard 默认 DB：`./data/privateplate-demo.sqlite`（跨重启保留家庭记忆）  
-- 测试使用 `:memory:`  
-- 「新对话」只清会话，不删 SQLite 家庭数据  
+- Dashboard 默认 DB：`./data/privateplate-demo.sqlite`（跨重启保留家庭记忆）
+- 测试使用 `:memory:`
+- 「新对话」只清会话，不删 SQLite 家庭数据
 - 提交材料导读：[`submission/README.md`](submission/README.md)
 
 ### 多模态输入（真实模型路径）
@@ -283,14 +262,9 @@ npm run check
 
 `fixtures/evals/public-v2-dev-seed.json` 是当前 8 条开发场景，
 `fixtures/evals/stateful-v2-lifecycle-specs.json` 是 6 条正式生命周期规格。
-生命周期规格由 `packages/evals/src/v2/runner.ts` 经过真实 Agent、Domain、SQLite 重开、checkpoint、
-预览和确认提交执行；它们的通过结果只证明 Product Resilient / Safety 结构层，统一是 `STRUCTURE_ONLY`，
-不提供模型能力分。Radeon 真实模型的诊断复跑结果见上文「当前证据边界」与 `submission/`；该复跑**不是**盲测正式成绩。
-旧 `fixtures/scenarios/agent-eval.json`、C0/Public Golden、旧 product E2E 仍保留；现有五条 layered
-场景也只按 `v2 routing smoke` 追溯，不称正式 E2E，不能作为当前 v2 主门。
-`npm run test:historical-v1-c0-integrity`（旧别名 `npm run test:c0-integrity`）仍保留为历史完整 C0 离线合同；
-`npm run test:historical-v1-routing-smoke` 明确标记旧五工具 routing smoke，当前 `check` 只运行它的
-不可冒充模型证据版本，以及不依赖旧 v1 工具合同的 `test:c0-integrity-current` 子集。
+生命周期规格证明 Product Resilient / Safety 结构层（`STRUCTURE_ONLY`），不提供模型能力分。
+Radeon 真实模型诊断复跑见上文「当前证据边界」与 `submission/`；**不是**盲测正式成绩。
+`npm run check` 含 `test:eval-v2`、typecheck、旧五工具 LocalMock routing smoke，以及不依赖旧 v1 工具合同的 `test:c0-integrity-current`。真正九工具产品路径以 `test:eval-v2` 为准。
 
 ## 仓库结构
 
@@ -301,26 +275,20 @@ apps/
 packages/
   contracts/          共享数据与校验合同
   domain/             SQLite、日账本、候选过滤、Agent 选菜校验
-  agent-runtime/      PrivatePlateAgent、八工具网关、local_vllm / ScriptedProvider
-  evals/              v2 schema/scorer、dev seed、生命周期规格；历史 v1 评测
-fixtures/             合成家庭与（历史）评测输入
-benchmarks/           本地与 Radeon 原始证据
+  agent-runtime/      PrivatePlateAgent、九工具网关、local_vllm / ScriptedProvider
+  evals/              v2 schema/scorer、dev seed、生命周期规格
+fixtures/             合成家庭与评测输入
+benchmarks/           Radeon 正式诊断与 A/B 证据
 docs/
-  PRIVATEPLATE_FULL_LOOP_AGENT_REBUILD_PLAN_FOR_GROK.md  闭环重建主线
-  evidence/           证据边界
   submission/         AMD 适配与提交材料
-  archive/            历史 PRD / 审计（非当前事实）
 ```
 
 ## 项目文档
 
-- [Agent 当前阅读入口](../AGENT_CONTEXT.md)
-- [当前产品 PRD](../PRIVATEPLATE_HACKATHON_PRD_V1.md)
-- [当前 Build Spec](../PRIVATEPLATE_CODEX_BUILD_SPEC_V1.md)
-- [闭环重建计划](PRIVATEPLATE_FULL_LOOP_AGENT_REBUILD_PLAN_FOR_GROK.md)
 - [AMD Radeon / ROCm 适配与优化说明](submission/AMD_RADEON_ROCM_ADAPTATION_AND_OPTIMIZATION.md)
+- [项目说明（英）](submission/PROJECT_SPECIFICATION.md)
+- [提交材料导读](submission/README.md)
 - 正式诊断证据：`benchmarks/c0/stage-b/sealed-suite-diag-16k-20260804T161006Z-brfix/`
-- [历史归档](archive/)：只用于追溯
 
 ## 提交材料状态
 
