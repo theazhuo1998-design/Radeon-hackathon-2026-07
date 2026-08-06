@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAtUtc": "2026-08-06T09:52:13.767Z",
+  "generatedAtUtc": "2026-08-06T10:08:40.796Z",
   "claimBoundary": "Checksums for offline fixture integrity. Synthetic demo data only; not clinical datasets.",
   "licenses": [
     {
@@ -25,6 +25,76 @@
       "path": "fixtures/LICENSES/PRIVATEPLATE_SYNTHETIC_DEMO_1.0.txt",
       "sha256": "16bb6825fb12ee584490c850d4f50e61117abaa35cb43a89abd6d0d9c085f364",
       "bytes": 581
+    },
+    {
+      "path": "fixtures/c0/FIXTURE_FREEZE.json",
+      "sha256": "7466efcb7757c9ca6e44f112bf689c28cecf2dacbc4927825e142f9492f82b79",
+      "bytes": 7799
+    },
+    {
+      "path": "fixtures/c0/hidden/v1/manifest.json",
+      "sha256": "010b5fb702586ff60311b3d981977939559bc21fe806dcd7ed652d5caa982fcf",
+      "bytes": 5222
+    },
+    {
+      "path": "fixtures/c0/hidden/v10/manifest.json",
+      "sha256": "f7a77a196a08a317630b79b7027d5a34153078969155e0553c59e3279feefb7c",
+      "bytes": 7814
+    },
+    {
+      "path": "fixtures/c0/hidden/v2/manifest.json",
+      "sha256": "160a893b72f99c5302319b05aafad027ae0db44221456a8f98a6952cfb82470a",
+      "bytes": 7879
+    },
+    {
+      "path": "fixtures/c0/hidden/v3/manifest.json",
+      "sha256": "a9f2d0f6c7d1e2ec79d6b5fc7dcaf0e6628a9cbad03aef58059bc6233b8c3b71",
+      "bytes": 7797
+    },
+    {
+      "path": "fixtures/c0/hidden/v4/manifest.json",
+      "sha256": "663f25c8372ac2f93ba6771ae94a03fd1f855a7dbd8479f92e2139b503376182",
+      "bytes": 7775
+    },
+    {
+      "path": "fixtures/c0/hidden/v5/manifest.json",
+      "sha256": "4679bf0f7265a1fa6f6946d1b88a0800943c43a03d6e5652f56f358b0d8b1846",
+      "bytes": 8066
+    },
+    {
+      "path": "fixtures/c0/hidden/v6/manifest.json",
+      "sha256": "adba05bbb59d5b29d411b71c0abf90c141934450c9a5dd115244d9f357961d49",
+      "bytes": 8133
+    },
+    {
+      "path": "fixtures/c0/hidden/v7/manifest.json",
+      "sha256": "ab605def4cfc51026010d429f38c6ac538f9dfb18007c0f958b1e7c7ac0387a7",
+      "bytes": 8113
+    },
+    {
+      "path": "fixtures/c0/hidden/v8/manifest.json",
+      "sha256": "be98098faa51f44aba76a63d6330b22fa7da1f813e6419708f56fb43302d4d8b",
+      "bytes": 8171
+    },
+    {
+      "path": "fixtures/c0/hidden/v9/manifest.json",
+      "sha256": "bbcaa666d18fe147088709bcd8acb62a31e767434ce2d888b7c5bc7c1663598b",
+      "bytes": 8376
+    },
+    {
+      "path": "fixtures/c0/tool-calling-holdout-v1.json",
+      "sha256": "2f6e3359209d3439e23151f00634fde7f71e7b48c854d628eeafd89602c3b3b0",
+      "bytes": 5921
+    },
+    {
+      "path": "fixtures/c0/tool-calling-scenarios.json",
+      "sha256": "57f723e062b8f31cc3ca006e9a600818d0f756ec248014911ecc40b1bdbc835e",
+      "bytes": 12646
+    },
+    {
+      "path": "fixtures/c0/v2/tool-calling-holdout-v2.json",
+      "sha256": "cbcfd88fe1fd2ee5d7eab2d5dd4b64577f6ac7d7cdc64e3227087d52330f20a4",
+      "bytes": 5647
     },
     {
       "path": "fixtures/c0/v2/tool-calling-scenarios.json",

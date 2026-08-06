@@ -1,0 +1,182 @@
+{
+  "schema_version": "1.0",
+  "suite": "holdout-v1",
+  "description": "PUBLIC VALIDATION suite for model-route evaluation (readable in-repo; NOT a hidden blind set). Frozen independently of the original 20-case public regression suite. True hidden tests are out of band and not stored here.",
+  "fixture_id_map": {
+    "members": {
+      "mem-admin": {
+        "display_name": "管理员",
+        "aliases": ["我"],
+        "health_tags": ["weight_management"]
+      },
+      "mem-father": {
+        "display_name": "父亲",
+        "aliases": ["爸爸"],
+        "health_tags": ["stable_type2_diabetes_demo"]
+      },
+      "mem-mother": {
+        "display_name": "母亲",
+        "aliases": ["妈妈"],
+        "health_tags": ["hypertension_demo"]
+      }
+    },
+    "foods": {
+      "food-tofu": "豆腐",
+      "food-chicken-leg": "鸡腿",
+      "food-cabbage": "白菜",
+      "food-beef": "牛肉"
+    },
+    "meal_templates": {
+      "tpl-tomato-egg": "番茄炒蛋",
+      "tpl-potato-chicken": "土豆炖鸡腿"
+    },
+    "guidance_plan_tags": {
+      "planning": "初次规划",
+      "replan": "重规划",
+      "privacy": "隐私",
+      "handoff": "任务交接"
+    },
+    "caregiver_recipients": {
+      "阿姨": "阿姨",
+      "保姆": "保姆",
+      "家庭保姆": "家庭保姆"
+    },
+    "active_plans": {
+      "plan-holdout-active": "当前计划"
+    }
+  },
+  "scenarios": [
+    {
+      "id": "holdout-v1-001",
+      "user_text": "查看爸爸当前的家庭与库存上下文。",
+      "current_state": {
+        "phase": "IDLE",
+        "dinerIds": ["mem-admin", "mem-father", "mem-mother"],
+        "activePlanId": null,
+        "activePlanVersion": null
+      },
+      "expected_tool": "get_meal_context",
+      "expected_arguments": {
+        "dinerIds": ["mem-father"]
+      }
+    },
+    {
+      "id": "holdout-v1-002",
+      "user_text": "只给爸爸规划晚餐，避开牛肉，不要求省事。",
+      "current_state": {
+        "phase": "COLLECTING_CONTEXT",
+        "dinerIds": ["mem-admin", "mem-father", "mem-mother"],
+        "activePlanId": null,
+        "activePlanVersion": null
+      },
+      "expected_tool": "compose_family_meal",
+      "expected_arguments": {
+        "dinerIds": ["mem-father"],
+        "mealType": "dinner",
+        "rejectedFoodIds": ["food-beef"],
+        "rejectedTemplateIds": [],
+        "requestedPriorityFoodIds": [],
+        "preferLowEffort": false
+      }
+    },
+    {
+      "id": "holdout-v1-003",
+      "user_text": "把上一版的土豆炖鸡腿换掉，其他不变。",
+      "current_state": {
+        "phase": "PRESENTING_PLAN",
+        "dinerIds": ["mem-admin", "mem-father", "mem-mother"],
+        "activePlanId": "plan-holdout-active",
+        "activePlanVersion": 1
+      },
+      "expected_tool": "revise_family_meal",
+      "expected_arguments": {
+        "rejectedTemplateId": "tpl-potato-chicken",
+        "rejectedFoodId": "",
+        "preferLowEffort": false
+      }
+    },
+    {
+      "id": "holdout-v1-004",
+      "user_text": "解释这份初次规划里的库存优先级，最多返回2条审核知识。",
+      "current_state": {
+        "phase": "PRESENTING_PLAN",
+        "dinerIds": ["mem-admin", "mem-father", "mem-mother"],
+        "activePlanId": "plan-holdout-active",
+        "activePlanVersion": 1
+      },
+      "expected_tool": "retrieve_approved_guidance",
+      "expected_arguments": {
+        "query": "解释这份初次规划里的库存优先级，最多返回2条审核知识。",
+        "memberTags": [],
+        "planTags": ["planning"],
+        "topK": 2
+      }
+    },
+    {
+      "id": "holdout-v1-005",
+      "user_text": "说明爸爸在初次规划中的控糖约束，最多返回1条审核知识。",
+      "current_state": {
+        "phase": "PRESENTING_PLAN",
+        "dinerIds": ["mem-father"],
+        "activePlanId": "plan-holdout-active",
+        "activePlanVersion": 1
+      },
+      "expected_tool": "retrieve_approved_guidance",
+      "expected_arguments": {
+        "query": "说明爸爸在初次规划中的控糖约束，最多返回1条审核知识。",
+        "memberTags": ["stable_type2_diabetes_demo"],
+        "planTags": ["planning"],
+        "topK": 1
+      }
+    },
+    {
+      "id": "holdout-v1-006",
+      "user_text": "给家庭保姆生成任务预览，不要发送，serveAt 使用 2026-08-01T17:15:00+08:00。",
+      "current_state": {
+        "phase": "PRESENTING_PLAN",
+        "dinerIds": ["mem-admin", "mem-father", "mem-mother"],
+        "activePlanId": "plan-holdout-active",
+        "activePlanVersion": 2
+      },
+      "expected_tool": "preview_caregiver_task",
+      "expected_arguments": {
+        "recipientLabel": "家庭保姆",
+        "serveAt": "2026-08-01T17:15:00+08:00"
+      }
+    },
+    {
+      "id": "holdout-v1-007",
+      "user_text": "我们三个人规划午餐，优先消耗白菜，不要番茄炒蛋，尽量省事。",
+      "current_state": {
+        "phase": "COLLECTING_CONTEXT",
+        "dinerIds": ["mem-admin", "mem-father", "mem-mother"],
+        "activePlanId": null,
+        "activePlanVersion": null
+      },
+      "expected_tool": "compose_family_meal",
+      "expected_arguments": {
+        "dinerIds": ["mem-admin", "mem-father", "mem-mother"],
+        "mealType": "lunch",
+        "rejectedFoodIds": [],
+        "rejectedTemplateIds": ["tpl-tomato-egg"],
+        "requestedPriorityFoodIds": ["food-cabbage"],
+        "preferLowEffort": true
+      }
+    },
+    {
+      "id": "holdout-v1-008",
+      "diner_ids_locked": true,
+      "user_text": "继续用当前锁定的就餐成员读取家庭库存上下文。",
+      "current_state": {
+        "phase": "IDLE",
+        "dinerIds": ["mem-mother"],
+        "activePlanId": null,
+        "activePlanVersion": null
+      },
+      "expected_tool": "get_meal_context",
+      "expected_arguments": {
+        "dinerIds": ["mem-mother"]
+      }
+    }
+  ]
+}
